@@ -1,11 +1,22 @@
 #!/bin/bash
 
+# name used for VIM env builded with this script
+VIM_NAME=vim8
+
 VIM_SOURCE=https://github.com/vim/vim.git
 
 VIM_INSTALL_DIR=~/.vim-install
 VIM_BUILD_DIR=$VIM_INSTALL_DIR/vim-build/
 
-VIM_TARGET_DIR=~/app/vim8/
+VIM_TARGET_DIR=~/app/$VIM_NAME
+
+VIMRC_DEF_LOC=~/.vimrc
+DOTVIM_DEF_LOC=~/.vim
+
+VIMRC_BAC_LOC=~/.vimrc.bac
+DOTVIM_BAC_LOC=~/.vim.bac
+
+DOTVIM_TARGET_DIR=~/dotfiles
 
 # try to use python 3.5, required python-dev
 PYTHON_3_CONFIG=/usr/bin/python3.5-config
@@ -83,6 +94,7 @@ getVim()
 
 }
 
+# Builds VIM in temporary location
 buildVim()
 {
   if [ ! -d $VIM_INSTALL_DIR/vim ]; then
@@ -119,7 +131,95 @@ buildVim()
 
 }
 
+# Copies build VIM to target location
+deployVim()
+{
+  if [ -d $VIM_TARGET_DIR ]; then
+    echo "Target VIM location exists, will be overridden"
+    rm -rf $VIM_TARGET_DIR
+  fi
+
+  mkdir $VIM_TARGET_DIR
+
+  cp -R $VIM_BUILD_DIR/* $VIM_TARGET_DIR
+
+  echo "Build VIM copied to target location $VIM_TARGET_DIR"
+}
+
+# Copies dot VIM directory to target location
+# Updates .vim and .vimrc symlink to new target
+# Creates backup files *.bac if they don't exist
+updateVimConfigs()
+{
+  # check if parent directory exists
+  if [ ! -d $DOTVIM_TARGET_DIR ]; then
+    mkdir $DOTVIM_TARGET_DIR
+  fi
+
+  if [ -d $DOTVIM_TARGET_DIR/$VIM_NAME ]; then
+    echo "Dot VIM already exists in requested location, override : $DOTVIM_TARGET_DIR/$VIM_NAME"
+    rm -rf $DOTVIM_TARGET_DIR/$VIM_NAME
+  fi
+
+  mkdir $DOTVIM_TARGET_DIR/$VIM_NAME
+
+  echo "Dot VIM copied to $DOTVIM_TARGET_DIR/$VIM_NAME"
+  cp -R ../vim/* $DOTVIM_TARGET_DIR/$VIM_NAME
+
+  # create symlink to .vim in home directory
+  if [[ -L $DOTVIM_DEF_LOC ]]; then
+    echo "Dot VIM already exists and is a symbolic link to `readlink $DOTVIM_DEF_LOC`"
+
+    # create a backup symlink only if the existing link points to different location then
+    # the one that is being created
+    if [ ! `readlink $DOTVIM_DEF_LOC` -ef $DOTVIM_TARGET_DIR/$VIM_NAME ]; then
+      if [ -L $DOTVIM_BAC_LOC ]; then
+        echo "Backup dot VIM symlink already exists, no new backup will be created"
+      else
+        echo "Backup dot VIM symlink created $DOTVIM_BAC_LOC -> `readlink $DOTVIM_DEF_LOC`"
+        ln -s `readlink $DOTVIM_DEF_LOC` $DOTVIM_BAC_LOC
+      fi
+    else
+      echo "Dot VIM symlink already points to target location"
+    fi
+
+    unlink $DOTVIM_DEF_LOC
+  fi
+
+  # FIXME handling if .vim is a normal directory
+
+  echo "Dot VIM symlink created $DOTVIM_DEF_LOC -> $DOTVIM_TARGET_DIR/$VIM_NAME"
+  ln -s $DOTVIM_TARGET_DIR/$VIM_NAME $DOTVIM_DEF_LOC
+
+  # create symlink to .vimrc in home directory
+  if [[ -L $VIMRC_DEF_LOC ]]; then
+    echo "Dot VIMRC already exists and is a symbolic link to `readlink $VIMRC_DEF_LOC`"
+
+    # create a backup symlink only if the existing link points to different location then
+    # the one that is being created
+    if [ ! `readlink $VIMRC_DEF_LOC` -ef $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc ]; then
+      if [ -L $VIMRC_BAC_LOC ]; then
+        echo "Backup dot VIMRC symlink already exists, no new backup will be created"
+      else
+        echo "Backup dot VIMRC symlink created $VIMRC_BAC_LOC -> `readlink $VIMRC_DEF_LOC`"
+        ln -s `readlink $VIMRC_DEF_LOC` $VIMRC_BAC_LOC
+      fi
+    else
+      echo "Dot VIMRC symlink already points to target location"
+    fi
+
+    unlink $VIMRC_DEF_LOC
+  fi
+
+  # FIXME handling if .vimrc is a normal file
+
+  echo "Dot VIMRC symlink created $VIMRC_DEF_LOC -> $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc"
+  ln -s $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc $VIMRC_DEF_LOC
+}
+
 getVim
 buildVim
 
+deployVim
+updateVimConfigs
 
