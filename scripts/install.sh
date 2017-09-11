@@ -197,7 +197,7 @@ updateVimConfigs()
 
     # create a backup symlink only if the existing link points to different location then
     # the one that is being created
-    if [ ! `readlink $VIMRC_DEF_LOC` -ef $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc ]; then
+    if [ ! `readlink $VIMRC_DEF_LOC` -ef $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc/vimrc ]; then
       if [ -L $VIMRC_BAC_LOC ]; then
         echo "Backup dot VIMRC symlink already exists, no new backup will be created"
       else
@@ -213,8 +213,8 @@ updateVimConfigs()
 
   # FIXME handling if .vimrc is a normal file
 
-  echo "Dot VIMRC symlink created $VIMRC_DEF_LOC -> $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc"
-  ln -s $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc $VIMRC_DEF_LOC
+  echo "Dot VIMRC symlink created $VIMRC_DEF_LOC -> $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc/vimrc"
+  ln -s $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc/vimrc $VIMRC_DEF_LOC
 }
 
 getVim
