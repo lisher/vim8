@@ -108,6 +108,14 @@ Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 " Shows manpage in split window
 Plug 'ludwig/split-manpage.vim'
 
+" YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+" Gutentags
+Plug 'ludovicchabant/vim-gutentags'
+
+" A.vim
+Plug 'vim-scripts/a.vim'
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))

@@ -47,6 +47,9 @@ source ~/.vim/vimrc/vimrc.plug.session
 " indentLine
 source ~/.vim/vimrc/vimrc.plug.indentline
 
+" YouCompleteMe
+source ~/.vim/vimrc/vimrc.plug.ycm
+
 " Misc plugins
 source ~/.vim/vimrc/vimrc.plug.misc
 
