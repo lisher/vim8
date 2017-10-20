@@ -68,3 +68,8 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
+"" Include user's project vim config
+if filereadable(expand("~/.vimrc.project"))
+  source ~/.vimrc.project
+endif
+
