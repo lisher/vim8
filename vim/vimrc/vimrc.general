@@ -22,7 +22,7 @@ set noswapfile
 
 " Specify the behavior when switching between buffers
 try
-  set switchbuf=useopen,usetab,newtab
+  set switchbuf=useopen,usetab
   set stal=2  "Always show the tab labels line
 catch
 endtry
@@ -65,3 +65,5 @@ endfunction
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l:%v
 
+" open diff windows in vertical split
+set diffopt+=vertical
