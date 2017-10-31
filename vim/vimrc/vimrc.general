@@ -43,7 +43,8 @@ set titleold="Terminal"
 set titlestring=%F
 
 " Define characters to use for whitespaces
-set listchars=tab:▸\ ,trail:~,eol:$
+"set listchars=tab:▸\ ,trail:~,eol:$
+set listchars=tab:~\ ,trail:~,eol:$
 
 " vsplit right from current buffer
 set splitright

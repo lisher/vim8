@@ -203,6 +203,9 @@ buildVim()
   echo "./configure $VIM_CONFIGURE_OPTIONS"
   ./configure $VIM_CONFIGURE_OPTIONS
 
+  # to be checked, seems to be set incorrectly on some servers by default
+  #make VIMRUNTIMEDIR=$VIM_TARGET_DIR/share/vim/vim80
+
   make
   make install
 
