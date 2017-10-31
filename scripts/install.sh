@@ -18,11 +18,100 @@ DOTVIM_BAC_LOC=~/.vim.bac
 
 DOTVIM_TARGET_DIR=~/dotfiles
 
-# try to use python 3.5, required python-dev
+# try to use python 3.5, required python-dev package
 PYTHON_3_CONFIG=/usr/bin/python3.5-config
 
-# for ruby ruby-dev needed
+#
+# FLAGS
+#
 
+DEBUG_FLAG=false
+
+GET_VIM_FLAG=false
+BUILD_VIM_FLAG=false
+DEPLOY_VIM_FLAG=false
+UPDATE_VIM_CFG_FLAG=false
+
+print_help()
+{
+  echo "Usage: `basename $0` <params>"
+  echo ""
+  echo "Supported parameters:"
+  echo "  --debug - prints debug info without executing any action"
+  echo "  --python-config <file> - path to python-config file"
+  echo "  --get-vim - clones VIM repository from GitHub to installation directory"
+  echo "  --build-vim - build VIM from sources"
+  echo "  --deploy-vim - copies build VIM binaries to target directory"
+  echo "  --update-vim-cfg - copies vim configs to target cfg dir"
+}
+
+# parsing command line arguments
+while [ $# -gt 0 ]; do
+  case $1 in
+    --help)
+      print_help
+      exit;;
+    -pc|--python-config)
+      shift
+      PYTHON_3_CONFIG=$1
+      shift
+      ;;
+    --debug)
+      DEBUG_FLAG=true
+      shift
+      ;;
+    --get-vim)
+      GET_VIM_FLAG=true
+      shift
+      ;;
+    --build-vim)
+      BUILD_VIM_FLAG=true
+      shift
+      ;;
+    --deploy-vim)
+      DEPLOY_VIM_FLAG=true
+      shift
+      ;;
+    --update-vim-cfg)
+      UPDATE_VIM_CFG_FLAG=true
+      shift
+      ;;
+    *)
+      echo "Unsupported parameter $1"
+      exit 1
+  esac
+done
+
+if [ "$DEBUG_FLAG" = true ]; then
+  echo "DEBUG MODE"
+  echo ""
+  echo "VIM source : $VIM_SOURCE"
+  echo "VIM target dir : $VIM_TARGET_DIR"
+  echo ".VIM target dir : $DOTVIM_TARGET_DIR"
+  echo ""
+  echo "Python config file : $PYTHON_3_CONFIG"
+  echo ""
+
+  tasks=""
+  if [ "$GET_VIM_FLAG" = true ]; then
+    tasks+="[GET-VIM]"
+  fi
+  if [ "$BUILD_VIM_FLAG" = true ]; then
+    tasks+="[BUILD-VIM]"
+  fi
+  if [ "$DEPLOY_VIM_FLAG" = true ]; then
+    tasks+="[DEPLOY-VIM]"
+  fi
+  if [ "$UPDATE_VIM_CFG_FLAG" = true ]; then
+    tasks+="[UPDATE-VIM-CFG]"
+  fi
+
+  echo "Tasks: $tasks"
+
+  exit 0
+fi
+
+# configure parameters to be checked
 #--with-x \
 #--enable-fail-if-missing \
 # VIM_CONFIGURE_OPTIONS=" \
@@ -217,9 +306,22 @@ updateVimConfigs()
   ln -s $DOTVIM_TARGET_DIR/$VIM_NAME/vimrc/vimrc $VIMRC_DEF_LOC
 }
 
-getVim
-buildVim
+################################################################################
+#
+# Execute requested actions
+#
+################################################################################
 
-deployVim
-updateVimConfigs
+if [ "$GET_VIM_FLAG" = true ]; then
+  getVim
+fi
+if [ "$BUILD_VIM_FLAG" = true ]; then
+  buildVim
+fi
+if [ "$DEPLOY_VIM_FLAG" = true ]; then
+  deployVim
+fi
+if [ "$UPDATE_VIM_CFG_FLAG" = true ]; then
+  updateVimConfigs
+fi
 
