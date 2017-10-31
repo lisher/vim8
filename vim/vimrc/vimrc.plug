@@ -36,7 +36,9 @@ call plug#begin(expand('~/.vim/plugged'))
 " NERDTree - sidebar file browser
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"LAG generator
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " GIT - fugitive for commands,
 "     - gitgutter for marking changed lines
@@ -56,16 +58,16 @@ Plug 'bronson/vim-trailing-whitespace'
 " Sidebar with list of classes/functions/variables
 Plug 'majutsushi/tagbar'
 
-" Makes solorscheme work better with terminal
-Plug 'vim-scripts/CSApprox'
+" Makes colorscheme work better with terminal
+"Plug 'vim-scripts/CSApprox'
 
 " Shows vertical lines for indents
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'vim-scripts/grep.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'scrooloose/syntastic'
+"Plug 'Raimondi/delimitMate'
+"Plug 'scrooloose/syntastic'
 Plug 'avelino/vim-bootstrap-updater'
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -78,11 +80,11 @@ let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
 endif
-Plug 'Shougo/vimproc.vim', {'do': g:make}
+"Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 "" Vim-Session
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
+"Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-session'
 
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
@@ -90,7 +92,7 @@ endif
 
 if v:version >= 704
   "" Snippets
-  Plug 'SirVer/ultisnips'
+  "Plug 'SirVer/ultisnips'
 endif
 
 Plug 'honza/vim-snippets'
@@ -103,19 +105,22 @@ Plug 'tomasr/molokai'
 "*****************************************************************************
 
 " c
-Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
+"Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
 
 " Shows manpage in split window
-Plug 'ludwig/split-manpage.vim'
+"Plug 'ludwig/split-manpage.vim'
 
 " YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Gutentags
-Plug 'ludovicchabant/vim-gutentags'
+"Plug 'ludovicchabant/vim-gutentags'
 
 " A.vim
 Plug 'vim-scripts/a.vim'
+
+" Mark.vim
+Plug 'Tuxdude/mark.vim'
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
@@ -126,5 +131,6 @@ call plug#end()
 
 " Required:
 filetype plugin indent on
+
 
 
