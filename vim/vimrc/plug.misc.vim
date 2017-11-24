@@ -29,10 +29,12 @@ let g:tagbar_ctags_bin = "/usr/bin/ctags"
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
+map <f5> :Rgrep<CR>
 
 let Grep_Default_Options = '-IR'
+let Grep_Find_Use_Xargs=1 "Use old way grep, since ag is not available on our machines
 let Grep_Default_Filelist='*.cc *.cpp *.hh *.h *.hpp *.sig'
-let Grep_Skip_Files = '*.log *.db'
+let Grep_Skip_Files = '*.log *.db .*'
 let Grep_Skip_Dirs = '.git obj'
 
 " vimshell.vim

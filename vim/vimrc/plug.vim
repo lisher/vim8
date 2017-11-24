@@ -100,6 +100,15 @@ Plug 'honza/vim-snippets'
 "" Color
 Plug 'tomasr/molokai'
 
+"" Startify
+Plug 'mhinz/vim-startify'
+
+"QFEnter allows you to open a Quickfix item in a window you choose
+Plug 'yssl/QFEnter'
+
+"" Fancy marks display and toggle
+Plug 'kshenoy/vim-signature'
+
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -121,6 +130,9 @@ Plug 'vim-scripts/a.vim'
 
 " Mark.vim
 Plug 'Tuxdude/mark.vim'
+
+" BufOnly - delete buffers except the current one
+Plug 'vim-scripts/BufOnly.vim'
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))

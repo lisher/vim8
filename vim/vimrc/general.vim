@@ -49,6 +49,12 @@ set listchars=tab:~\ ,trail:~,eol:$
 " vsplit right from current buffer
 set splitright
 
+"Number line on the left
+set number
+
+"Show number line relative to current line
+set relativenumber
+
 """"""""""""""""""""""""""""""
 "   Status line
 """"""""""""""""""""""""""""""
