@@ -67,3 +67,5 @@ endif
 " Add to a.vim additional extensions
 let g:alternateExtensions_{'cc'} = "hh"
 let g:alternateExtensions_{'hh'} = "cc"
+" Do not switch to 'cc', 'hh' file if those not exist
+let g:alternateNoDefaultAlternate = 1 
