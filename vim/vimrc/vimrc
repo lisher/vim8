@@ -26,6 +26,7 @@ source ~/.vim/vimrc/plug.session.vim " vim-session
 source ~/.vim/vimrc/plug.indentline.vim " indentLine
 source ~/.vim/vimrc/plug.ycm.vim " YouCompleteMe
 source ~/.vim/vimrc/plug.misc.vim " Misc plugins
+source ~/.vim/vimrc/plug.startify.vim " Startup screen
 source ~/.vim/vimrc/mapping.general.vim " General mapping
 source ~/.vim/vimrc/mapping.move.vim " General mapping
 source ~/.vim/vimrc/mapping.find.vim " General mapping
