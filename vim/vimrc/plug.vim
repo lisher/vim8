@@ -107,6 +107,9 @@ Plug 'yssl/QFEnter'
 "" Fancy marks display and toggle
 Plug 'kshenoy/vim-signature'
 
+"" Precesion colors for machines and people
+Plug 'altercation/vim-colors-solarized'
+
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
