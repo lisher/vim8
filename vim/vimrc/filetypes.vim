@@ -27,6 +27,12 @@ autocmd BufWrite *.h,*.hh,*.c,*.cc,*.cpp FixWhitespace
 " Script files
 autocmd BufWrite *.pl,*.sh,*.py FixWhitespace
 
+"Display .sig as c++ file
+au BufNewFile,BufRead *.sig set filetype=cpp
+
+"Display .cmd as script
+au BufNewFile,BufRead *.cmd set filetype=sh
+
 set autoread
 
 
