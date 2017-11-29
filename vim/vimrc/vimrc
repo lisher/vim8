@@ -2,66 +2,34 @@
 "
 "      VIMRC - universal
 "
-" Created:  lisher
-" Version:  0.30
-" Last_update: 11.09.2017
+" Created:        Lisher
+" Contributors:   Aeshal
+" Version:        0.40
+" Last_update:    29.11.2017
 "
-" Based_on: VIMRC by Amir Salihefendic
-" Thanks:   Michael Naumann
+" Based_on:       VIMRC by Amir Salihefendic
+" Thanks:         Michael Naumann
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 1 Plugins management
-source ~/.vim/vimrc/vimrc.plug
-
-" 2 General settings
-source ~/.vim/vimrc/vimrc.general
-
-" 3 User Inteface
-source ~/.vim/vimrc/vimrc.ui
-
-" 4 Graphics
-source ~/.vim/vimrc/vimrc.graphic
-
-" 4 Encoding
-source ~/.vim/vimrc/vimrc.encoding
-
-" Filetypes
-source ~/.vim/vimrc/vimrc.filetypes
-
-" 5 Text format
-source ~/.vim/vimrc/vimrc.text
-
-" X Evil mode
-source ~/.vim/vimrc/vimrc.evilmode
-
-" airline
-source ~/.vim/vimrc/vimrc.plug.airline
-
-" NERDTree
-source ~/.vim/vimrc/vimrc.plug.nerdtree
-
-" vim-session
-source ~/.vim/vimrc/vimrc.plug.session
-
-" indentLine
-source ~/.vim/vimrc/vimrc.plug.indentline
-
-" YouCompleteMe
-source ~/.vim/vimrc/vimrc.plug.ycm
-
-" Misc plugins
-source ~/.vim/vimrc/vimrc.plug.misc
-
-" General mapping
-source ~/.vim/vimrc/vimrc.map.general
-
-" General mapping
-source ~/.vim/vimrc/vimrc.map.move
-
-" General mapping
-source ~/.vim/vimrc/vimrc.map.find
-
+source ~/.vim/vimrc/plug.vim " Plugins management
+source ~/.vim/vimrc/general.vim " General settings
+source ~/.vim/vimrc/ui.vim " User Inteface
+source ~/.vim/vimrc/graphic.vim " Graphics
+source ~/.vim/vimrc/encoding.vim " Encoding
+source ~/.vim/vimrc/filetypes.vim " Filetypes
+source ~/.vim/vimrc/text.vim " Text format
+source ~/.vim/vimrc/evilmode.vim " X Evil mode
+source ~/.vim/vimrc/plug.airline.vim " airline
+source ~/.vim/vimrc/plug.nerdtree.vim " NERDTree
+source ~/.vim/vimrc/plug.session.vim " vim-session
+source ~/.vim/vimrc/plug.indentline.vim " indentLine
+source ~/.vim/vimrc/plug.ycm.vim " YouCompleteMe
+source ~/.vim/vimrc/plug.misc.vim " Misc plugins
+source ~/.vim/vimrc/plug.startify.vim " Startup screen
+source ~/.vim/vimrc/mapping.general.vim " General mapping
+source ~/.vim/vimrc/mapping.move.vim " General mapping
+source ~/.vim/vimrc/mapping.find.vim " General mapping
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
