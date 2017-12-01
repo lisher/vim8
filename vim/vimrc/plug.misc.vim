@@ -66,3 +66,8 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 
+" Add to a.vim additional extensions
+let g:alternateExtensions_{'cc'} = "hh"
+let g:alternateExtensions_{'hh'} = "cc"
+" Do not switch to 'cc', 'hh' file if those not exist
+let g:alternateNoDefaultAlternate = 1 

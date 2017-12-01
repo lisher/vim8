@@ -74,3 +74,4 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 
 " open diff windows in vertical split
 set diffopt+=vertical
+
