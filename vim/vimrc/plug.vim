@@ -80,7 +80,7 @@ let g:make = 'gmake'
 if exists('make')
         let g:make = 'make'
 endif
-"Plug 'Shougo/vimproc.vim', {'do': g:make}
+Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 "" Vim-Session
 "Plug 'xolox/vim-misc'
@@ -126,7 +126,7 @@ Plug 'altercation/vim-colors-solarized'
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Gutentags
-"Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " A.vim
 Plug 'vim-scripts/a.vim'
