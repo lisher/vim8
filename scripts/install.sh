@@ -43,10 +43,10 @@ print_help()
   echo "Supported parameters:"
   echo "  --debug - prints debug info without executing any action"
   echo "  --python-config <file> - path to python-config file"
-  echo "  --get-vim - clones VIM repository from GitHub to installation directory"
-  echo "  --build-vim - build VIM from sources"
-  echo "  --deploy-vim - copies build VIM binaries to target directory"
-  echo "  --update-vim-cfg - copies vim configs to target cfg dir"
+  echo "  -gv|--get-vim - clones VIM repository from GitHub to installation directory"
+  echo "  -bv|--build-vim - build VIM from sources"
+  echo "  -dv|--deploy-vim - copies build VIM binaries to target directory"
+  echo "  -uvc|--update-vim-cfg - copies vim configs to target cfg dir"
 }
 
 # parsing command line arguments
@@ -64,19 +64,19 @@ while [ $# -gt 0 ]; do
       PARAM_MASK=$(($PARAM_MASK | $DEBUG_BIT))
       shift
       ;;
-    --get-vim)
+    -gv|--get-vim)
       PARAM_MASK=$(($PARAM_MASK | $GET_VIM_BIT))
       shift
       ;;
-    --build-vim)
+    -bv|--build-vim)
       PARAM_MASK=$(($PARAM_MASK | $BUILD_VIM_BIT))
       shift
       ;;
-    --deploy-vim)
+    -dv|--deploy-vim)
       PARAM_MASK=$(($PARAM_MASK | $DEPLOY_VIM_BIT))
       shift
       ;;
-    --update-vim-cfg)
+    -uvc|--update-vim-cfg)
       PARAM_MASK=$(($PARAM_MASK | $UPDATE_VIM_CFG_BIT))
       shift
       ;;
