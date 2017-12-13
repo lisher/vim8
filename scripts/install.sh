@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# path to the repo from which this script was executed
+CURRENT_REPO=$(dirname $(dirname $(readlink -f $0)))
+
 # name used for VIM env builded with this script
 VIM_NAME=vim8
 
@@ -253,7 +256,7 @@ updateVimConfigs()
   mkdir $DOTVIM_TARGET_DIR/$VIM_NAME
 
   echo "Dot VIM copied to $DOTVIM_TARGET_DIR/$VIM_NAME"
-  cp -R ../vim/* $DOTVIM_TARGET_DIR/$VIM_NAME
+  cp -R $CURRENT_REPO/vim/* $DOTVIM_TARGET_DIR/$VIM_NAME
 
   # create symlink to .vim in home directory
   if [[ -L $DOTVIM_DEF_LOC ]]; then
