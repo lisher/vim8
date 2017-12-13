@@ -28,12 +28,13 @@ PYTHON_3_CONFIG=/usr/bin/python3.5-config
 # FLAGS
 #
 
-DEBUG_FLAG=false
+PARAM_MASK=0
 
-GET_VIM_FLAG=false
-BUILD_VIM_FLAG=false
-DEPLOY_VIM_FLAG=false
-UPDATE_VIM_CFG_FLAG=false
+DEBUG_BIT=1
+GET_VIM_BIT=2
+BUILD_VIM_BIT=4
+DEPLOY_VIM_BIT=8
+UPDATE_VIM_CFG_BIT=16
 
 print_help()
 {
@@ -60,23 +61,23 @@ while [ $# -gt 0 ]; do
       shift
       ;;
     --debug)
-      DEBUG_FLAG=true
+      PARAM_MASK=$(($PARAM_MASK | $DEBUG_BIT))
       shift
       ;;
     --get-vim)
-      GET_VIM_FLAG=true
+      PARAM_MASK=$(($PARAM_MASK | $GET_VIM_BIT))
       shift
       ;;
     --build-vim)
-      BUILD_VIM_FLAG=true
+      PARAM_MASK=$(($PARAM_MASK | $BUILD_VIM_BIT))
       shift
       ;;
     --deploy-vim)
-      DEPLOY_VIM_FLAG=true
+      PARAM_MASK=$(($PARAM_MASK | $DEPLOY_VIM_BIT))
       shift
       ;;
     --update-vim-cfg)
-      UPDATE_VIM_CFG_FLAG=true
+      PARAM_MASK=$(($PARAM_MASK | $UPDATE_VIM_CFG_BIT))
       shift
       ;;
     *)
@@ -85,7 +86,7 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-if [ "$DEBUG_FLAG" = true ]; then
+if (( $PARAM_MASK & $DEBUG_BIT )); then
   echo "DEBUG MODE"
   echo ""
   echo "VIM source : $VIM_SOURCE"
@@ -94,18 +95,19 @@ if [ "$DEBUG_FLAG" = true ]; then
   echo ""
   echo "Python config file : $PYTHON_3_CONFIG"
   echo ""
+  echo "PARAM_MASK = $PARAM_MASK"
 
   tasks=""
-  if [ "$GET_VIM_FLAG" = true ]; then
+  if (( $PARAM_MASK & $GET_VIM_BIT )); then
     tasks+="[GET-VIM]"
   fi
-  if [ "$BUILD_VIM_FLAG" = true ]; then
+  if (( $PARAM_MASK & $BUILD_VIM_BIT )); then
     tasks+="[BUILD-VIM]"
   fi
-  if [ "$DEPLOY_VIM_FLAG" = true ]; then
+  if (( $PARAM_MASK & $DEPLOY_VIM_BIT )); then
     tasks+="[DEPLOY-VIM]"
   fi
-  if [ "$UPDATE_VIM_CFG_FLAG" = true ]; then
+  if (( $PARAM_MASK & $UPDATE_VIM_CFG_BIT )); then
     tasks+="[UPDATE-VIM-CFG]"
   fi
 
@@ -315,16 +317,19 @@ updateVimConfigs()
 #
 ################################################################################
 
-if [ "$GET_VIM_FLAG" = true ]; then
+if (( $PARAM_MASK & $GET_VIM_BIT )); then
   getVim
 fi
-if [ "$BUILD_VIM_FLAG" = true ]; then
+if (( $PARAM_MASK & $BUILD_VIM_BIT )); then
   buildVim
 fi
-if [ "$DEPLOY_VIM_FLAG" = true ]; then
+if (( $PARAM_MASK & $DEPLOY_VIM_BIT )); then
   deployVim
 fi
-if [ "$UPDATE_VIM_CFG_FLAG" = true ]; then
+if (( $PARAM_MASK & $UPDATE_VIM_CFG_BIT )); then
   updateVimConfigs
 fi
 
+if (( $PARAM_MASK == 0 )); then
+  print_help
+fi
